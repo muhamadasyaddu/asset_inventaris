@@ -22,14 +22,18 @@
 
     <!-- Custom Enterprise CSS -->
     <style>
-        :root {
+       :root {
             --sidebar-width: 260px;
-            --sidebar-bg: #0f172a;
-            --sidebar-hover: #1e293b;
-            --sidebar-active: #3b82f6;
+
+            --sidebar-bg: #1b3b28;
+            --sidebar-hover: #243447;
+            --sidebar-active: #D4A017;
+
             --topbar-height: 64px;
-            --primary-color: #2563eb;
-            --bg-body: #f8fafc;
+
+            --primary-color: #1D4ED8;
+
+            --bg-body: #F4F6F9;
         }
 
         body {
@@ -43,13 +47,23 @@
         #sidebar-wrapper {
             min-height: 100vh;
             width: var(--sidebar-width);
-            background-color: var(--sidebar-bg);
+
+            background:
+                linear-gradient(
+                    180deg,
+                    #1B263B 0%,
+                    #23395D 100%
+                );
+
             position: fixed;
             top: 0;
             left: 0;
             z-index: 1000;
-            transition: all 0.3s ease;
-            box-shadow: 4px 0 10px rgba(0, 0, 0, 0.05);
+
+            transition: all .3s ease;
+
+            box-shadow:
+                4px 0 18px rgba(0,0,0,.10);
         }
 
         .sidebar-heading {
@@ -57,31 +71,83 @@
             display: flex;
             align-items: center;
             padding: 0 1.5rem;
+
             color: #ffffff;
+
             font-size: 1.15rem;
             font-weight: 700;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            letter-spacing: -0.02em;
+
+            background: rgba(27, 20, 237, 0.03);
+
+            border-bottom: 1px solid rgba(255,255,255,.08);
+        }
+        .sidebar-logo{
+            width:46px;
+            height:46px;
+            object-fit:contain;
+            margin-right:12px;
+
+            background:#ffffff;
+
+            border-radius:50%;
+
+            padding:2px;
+
+            box-shadow:
+                0 2px 8px rgba(0,0,0,.15);
         }
 
-        .sidebar-heading i {
-            color: #60a5fa;
+        .sidebar-title{
+            color:#ffffff;
+            font-size:15px;
+            font-weight:700;
+            line-height:1.2;
         }
 
+        .sidebar-section-title{
+            padding: 18px 24px 8px;
+
+            font-size: 11px;
+
+            font-weight: 700;
+
+            letter-spacing: 1.5px;
+
+            text-transform: uppercase;
+
+            color: #94A3B8;
+
+            border: none;
+
+            user-select: none;
+        }
+
+        .sidebar-subtitle{
+            color:#94a3b8;
+            font-size:10px;
+            letter-spacing:1px;
+            text-transform:uppercase;
+        }
         .list-group-sidebar {
             padding: 1rem 0;
         }
 
-        .sidebar-link {
+                .sidebar-link {
             display: flex;
             align-items: center;
-            padding: 0.8rem 1.5rem;
-            color: #94a3b8;
+
+            padding: 0.85rem 1.5rem;
+
+            color: #C7D2E0;
+
             text-decoration: none;
-            font-size: 0.925rem;
+
+            font-size: .93rem;
             font-weight: 500;
-            transition: all 0.2s ease;
+
             border-left: 4px solid transparent;
+
+            transition: all .25s ease;
         }
 
         .sidebar-link i {
@@ -92,14 +158,21 @@
         }
 
         .sidebar-link:hover {
-            color: #f8fafc;
-            background-color: var(--sidebar-hover);
+            color: #ffffff;
+
+            background-color:
+                rgba(255,255,255,.05);
+
+            padding-left: 1.7rem;
         }
 
         .sidebar-link.active {
             color: #ffffff;
-            background-color: rgba(59, 130, 246, 0.15);
-            border-left-color: var(--sidebar-active);
+
+            background:
+                rgba(212,160,23,.12);
+
+            border-left: 4px solid #D4A017;
         }
 
         .sidebar-link.active i {
@@ -275,29 +348,38 @@
         <!-- Sidebar Navigation -->
         <aside id="sidebar-wrapper">
             <div class="sidebar-heading">
-                <i class="fa-solid fa-boxes-stacked me-2"></i>
-                <span>ASSET INVENTARIS</span>
+
+                <img src="{{ asset('images/logo-smk.png') }}"
+                    alt="Logo SMK Informatika Utama"
+                    class="sidebar-logo">
+
+                <div>
+                    <div class="sidebar-title">
+                        ASSET INVENTARIS
+                    </div>
+                </div>
+
             </div>
             <div class="list-group list-group-flush list-group-sidebar">
                 <a href="{{ route('dashboard') }}" class="sidebar-link {{ request()->routeIs('dashboard') ? 'active' : '' }}">
-                    <i class="fa-solid fa-chart-pie"></i>
+                    <i class="fa-solid fa-chart-line"></i>
                     <span>Dashboard</span>
                 </a>
 
-                <div class="sidebar-heading fs-6 text-uppercase text-muted pt-3 pb-1 px-3 style-heading" style="font-size: 0.7rem !important; letter-spacing: 0.1em; border: none; height: auto;">
-                    MANAJEMEN DATA
-                </div>
+               <div class="sidebar-section-title">
+                MANAJEMEN DATA
+               </div>
 
                 <a href="{{ route('assets.index') }}" class="sidebar-link {{ request()->routeIs('assets.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-box-archive"></i>
+                    <i class="fa-solid fa-laptop-file"></i>
                     <span>Data Aset</span>
                 </a>
                 <a href="{{ route('categories.index') }}" class="sidebar-link {{ request()->routeIs('categories.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-tags"></i>
+                    <i class="fa-solid fa-layer-group"></i>
                     <span>Kategori Aset</span>
                 </a>
                 <a href="{{ route('suppliers.index') }}" class="sidebar-link {{ request()->routeIs('suppliers.*') ? 'active' : '' }}">
-                    <i class="fa-solid fa-truck-field"></i>
+                    <i class="fa-solid fa-handshake"></i>
                     <span>Supplier</span>
                 </a>
                 <a href="{{ route('locations.index') }}" class="sidebar-link {{ request()->routeIs('locations.*') ? 'active' : '' }}">
@@ -321,7 +403,6 @@
                 <div class="d-flex align-items-center gap-3">
                     <div class="text-end d-none d-sm-block">
                         <span class="d-block fw-semibold text-dark fs-7">Administrator System</span>
-                        <span class="text-muted small">Laragon 6.0 &bull; PHP 8.2 &bull; Laravel 12</span>
                     </div>
                     <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center fw-bold" style="width: 38px; height: 38px;">
                         A
